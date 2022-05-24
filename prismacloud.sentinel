@@ -1,5 +1,6 @@
 import "http"
 import "json"
+import "tfplan/v2" as tfplan
 
 param prisma_access_key
 param prisma_secret_key
