@@ -47,28 +47,7 @@ variable "region" {
   default = "us-west-2"
 }
 
-variable ami {
-  type    = "string"
-  default = "ami-09a5b0b7edf08843d"
-}
 
-variable "dbname" {
-  type        = "string"
-  description = "Name of the Database"
-  default     = "db1"
-}
-
-variable "password" {
-  type        = "string"
-  description = "Database password"
-  default     = "Aa1234321Bb"
-}
-
-variable "neptune-dbname" {
-  type        = "string"
-  description = "Name of the Neptune graph database"
-  default     = "neptunedb1"
-}
 resource "aws_s3_bucket" "data" {
   bucket        = "${local.resource_prefix.value}-data"
   acl           = "public-read"
