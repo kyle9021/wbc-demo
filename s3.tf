@@ -21,6 +21,13 @@ resource "aws_s3_bucket" "b" {
   }
 }
 
+
+locals {
+  resource_prefix = {
+    value = "${data.aws_caller_identity.current.account_id}-${var.company_name}-${var.environment}"
+  }
+}
+
 resource "aws_s3_bucket" "data" {
   bucket        = "${local.resource_prefix.value}-data"
   acl           = "public-read"
