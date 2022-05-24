@@ -12,17 +12,16 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "log_bucket" {
-  bucket = "demo-log-bucket"
-  acl    = "log-delivery-write"
+resource "aws_s3_bucket" "b" {
+  bucket = "my-tf-test-bucket"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
 }
 
-resource "aws_s3_bucket" "b" {
-  bucket = "demo-test-bucket"
-  acl    = "public"
-
-  logging {
-    target_bucket = aws_s3_bucket.log_bucket.id
-    target_prefix = "log/"
-  }
+resource "aws_s3_bucket_acl" "example" {
+  bucket = aws_s3_bucket.b.id
+  acl    = "private"
 }
