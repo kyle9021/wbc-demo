@@ -21,6 +21,7 @@ resource "aws_s3_bucket" "b" {
   }
 }
 
+data "aws_caller_identity" "current" {}
 
 locals {
   resource_prefix = {
