@@ -1,4 +1,4 @@
 policy "prismacloud" {
-        source            = "/prismacloud.sentinel"
+        source            = "./prismacloud.sentinel"
         enforcement_level = "hard-mandatory"
 }
