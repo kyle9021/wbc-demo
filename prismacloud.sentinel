@@ -5,7 +5,8 @@ import "tfplan/v2" as tfplan
 param prisma_access_key
 param prisma_secret_key
 
-auth_body = {"username", prisma_access_key, "password", prisma_secret_key}
+auth_body = {"username": prisma_access_key, "password": prisma_secret_key}
+print(auth_body)
 
 loginReq = http.request("https://api2.prismacloud.io/login").with_body(print(auth_body)).with_header("Content-Type", "application/json")
 loginResp = json.unmarshal(http.post(loginReq).body)
