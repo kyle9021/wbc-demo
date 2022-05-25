@@ -25,8 +25,4 @@ resp = json.unmarshal(http.get(req).body)
 
 
   
-main = rule { 
-print(auth_body)
-print(loginResp.token)
-length(resp.violations) < 1 
-}
+main = rule { length(resp.violations) < 1 }
