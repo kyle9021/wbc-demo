@@ -7,10 +7,26 @@ param prisma_secret_key
 
 auth_body = {"username": prisma_access_key, "password": prisma_secret_key}
 
-loginReq = http.post("https://api2.prismacloud.io/login").with_body(json.marshal("auth_body")).with_header("Content-Type", "application/json").with_header("Accept", application/json")
+loginReq = http.request("https://api2.prismacloud.io/login").with_body(json.marshal("auth_body")).with_header("Content-Type", "application/json").with_header("Accept", "application/json")
 loginResp = json.unmarshal(http.post(loginReq).body)
 
+req = http.request("https://api2.prismacloud.io/bridgecrew/api/v1/tfCloud/sentinel/ws-saMpcRxk9DTTQ1xw").with_header("Authorization", loginResp.token)
+resp = json.unmarshal(http.get(req).body)
+ if (length(resp.violations) > 0) {
+    print("Violations:\n")
+    for resp.violations as violation {
+        print(violation.title)
+        print("Resource: " + violation.resource_id)
+        print("Violation ID: " + violation.violation_id)
+        print("\n")
+    }
+ }
+ print("More details: " + resp.details_url)
 
 
   
-main = rule   {print(loginResp.token)}      
+main = rule { 
+print(auth_body)
+print(loginResp.token)
+length(resp.violations) < 1 
+}
