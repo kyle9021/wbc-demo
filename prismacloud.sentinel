@@ -7,7 +7,7 @@ param prisma_secret_key
 
 auth_body = {"username": prisma_access_key, "password": prisma_secret_key}
 
-loginReq = http.post("https://api2.prismacloud.io/login").with_body(json.marshal("auth_body")).with_header("Content-Type", "application/json")
+loginReq = http.post("https://api2.prismacloud.io/login").with_body(json.marshal("auth_body")).with_header("Content-Type", "application/json").with_header("Accept", application/json")
 loginResp = json.unmarshal(http.post(loginReq).body)
 
 
