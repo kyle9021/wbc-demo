@@ -4,7 +4,8 @@ import "json"
 param prisma_access_key
 param prisma_secret_key 
 
-loginReq = http.request("https://api2.prismacloud.io/login").with_body(json.marshal({"username": prisma_access_key, "password": prisma_secret_key})).with_header("Content-Type", "application/json").with_header("accept", "application/json")
+auth_body = {"username": prisma_access_key, "password": prisma_secret_key }
+loginReq = http.request("https://api2.prismacloud.io/login").with_body(json.marshal(auth_body)).with_header("Content-Type", "application/json").with_header("accept", "application/json")
 loginResp = json.unmarshal(http.post(loginReq).body)
 
 req = http.request("https://api2.prismacloud.io/bridgecrew/api/v1/tfCloud/sentinel/ws-saMpcRxk9DTTQ1xw").with_header("Authorization", loginResp.token)
