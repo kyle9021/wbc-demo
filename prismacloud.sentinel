@@ -12,4 +12,4 @@ req = http.request("https://api2.prismacloud.io/bridgecrew/api/v1/tfCloud/sentin
 resp = json.unmarshal(http.get(req).body)
 
 
-main = rule { print(resp.violations)}
+main = rule { print(resp)}
