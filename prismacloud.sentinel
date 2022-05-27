@@ -6,7 +6,7 @@ param PRISMA_SECRET_KEY
 
 AUTH_BODY = {"username": PRISMA_ACCESS_KEY, "password": PRISMA_SECRET_KEY}
 
-loginReq = http.request("https://api2.prismacloud.io/login").with_body(json.marshal("AUTH_BODY")).with_header("Content-Type", "application/json")
+loginReq = http.request("https://api2.prismacloud.io/login").with_body(json.marshal(AUTH_BODY)).with_header("Content-Type", "application/json")
 loginResp = json.unmarshal(http.post(loginReq).body)
 
 req = http.request("https://api2.prismacloud.io/bridgecrew/api/v1/tfCloud/sentinel/ws-saMpcRxk9DTTQ1xw").with_header("Authorization", loginResp.token)
