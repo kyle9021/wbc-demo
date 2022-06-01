@@ -26,7 +26,7 @@ jobs:
         uses: bridgecrewio/bridgecrew-action@master
         with:
           api-key: ${{ secrets.BRIDGECREW_API_KEY }}
-          directory: /
+          directory: ./
 
       # Provides AWS credentials to Terraform
       # By default, Terraform checks the home directory for a .aws folder with a credential file
