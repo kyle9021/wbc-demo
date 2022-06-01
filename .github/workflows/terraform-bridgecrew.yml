@@ -20,13 +20,6 @@ jobs:
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
         
-      - uses: actions/checkout@v2
-      - name: Run Bridgecrew 
-        id: Bridgecrew
-        uses: bridgecrewio/bridgecrew-action@master
-        with:
-          api-key: ${{ secrets.BRIDGECREW_API_KEY }}
-          directory: ./
 
       # Provides AWS credentials to Terraform
       # By default, Terraform checks the home directory for a .aws folder with a credential file
@@ -53,6 +46,14 @@ jobs:
       - name: "Run - Terraform Plan"
         id: plan
         run: terraform plan -input=false -no-color
+        
+      - uses: actions/checkout@v2
+      - name: Run Bridgecrew 
+        id: Bridgecrew
+        uses: bridgecrewio/bridgecrew-action@master
+        with:
+          api-key: ${{ secrets.BRIDGECREW_API_KEY }}
+          directory: ./
         
 
 
