@@ -1,3 +1,2 @@
-# wbc-demo
+# newscbc-demo
 
-something silly
