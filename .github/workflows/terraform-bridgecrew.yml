@@ -1,4 +1,4 @@
-name: "Terraform Plan"
+name: "Terraform Plan + Bridgecrew"
 
 # Trigger when a pull request is received
 on:
@@ -19,13 +19,6 @@ jobs:
       # Marketplace: https://github.com/marketplace/actions/checkout
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
-
-      # Static analysis of Terraform templates to spot potential security issues
-      # Marketplace: https://github.com/marketplace/actions/terraform-security-scan
-      - name: "Setup - Security Scan"
-        uses: triat/terraform-security-scan@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Provides AWS credentials to Terraform
       # By default, Terraform checks the home directory for a .aws folder with a credential file
@@ -50,4 +43,12 @@ jobs:
       - name: "Run - Terraform Plan"
         id: plan
         run: terraform plan -input=false -no-color
+        
+      - uses: actions/checkout@v2
+      - name: Run Bridgecrew 
+        id: Bridgecrew
+        uses: bridgecrewio/bridgecrew-action@master
+        with:
+          api-key: ${{ secrets.BRIDGECREW_API_KEY }}
+          directory: /
 
