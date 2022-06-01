@@ -1,4 +1,4 @@
-name: "Terraform Plan + Bridgecrew"
+name: "Terraform Plan Bridgecrew"
 
 # Trigger when a pull request is received
 on:
@@ -31,8 +31,10 @@ jobs:
           echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
       # Downloads a specific version of Terraform CLI and adds it to PATH
       # Marketplace: https://github.com/marketplace/actions/hashicorp-setup-terraform
-      - name: "Setup - Terraform CLI"
-        uses: hashicorp/setup-terraform@v1.0.1
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       # Init pulls credentials from the .aws/credentials file by default
       - name: "Run - Terraform Init"
