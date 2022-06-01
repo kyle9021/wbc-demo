@@ -1,4 +1,11 @@
 terraform {
+  cloud {
+    organization = "kb-pa"
+
+    workspaces {
+      name = "gh-actions"
+    }
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
