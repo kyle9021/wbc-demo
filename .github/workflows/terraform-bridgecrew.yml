@@ -8,8 +8,8 @@ on:
   pull_request:
 
 jobs:
-  terraform-plan:
-    name: "Terraform Plan"
+  terraform-plan-prisma-bridgecrew:
+    name: "Terraform + BridgeCrew/Prisma Scan"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,7 +26,6 @@ jobs:
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      # Init pulls credentials from the .aws/credentials file by default
       - name: "Run - Terraform Init"
         run: terraform init -input=false
 
