@@ -4,6 +4,7 @@ Requirements:
 * A github repo with terraform files in it
 * An AWS Account with an IAM user that has permissions to deploy IaC files
 * An Access Key and Secret key created for your IAM user
+* A blank text doc that looks like [this](https://github.com/kyle9021/wbc-demo/blob/main/example_text_doc.txt)
 
 
 ## In Terraform Cloud
