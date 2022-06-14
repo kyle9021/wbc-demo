@@ -1,9 +1,10 @@
 # Prisma Cloud Code Security and Terraform Sentinel Set-up
 Requirements:
 
-* A github repo with terraform files in it
+* GitHub repository with terraform files in it something like [this](https://github.com/kyle9021/wbc-demo)
 * An AWS Account with an IAM user that has permissions to deploy IaC files
-* An Access Key and Secret key created for your IAM user
+* AWS Access Key and Secret key created for your IAM user
+* A license for Prisma Cloud Enterprise with the Code Security Module. 
 * A blank text doc that looks like [this](https://github.com/kyle9021/wbc-demo/blob/main/example_text_doc.txt)
 
 
@@ -182,7 +183,7 @@ main = rule { length(resp.violations) < 1 }
 
 NOTE: The status from each run will show up both in Terraform Cloud and in the Prisma Cloud Code Security Module! So both the Prisma Cloud Admin and the Admin of the terraform cloud environment can see the same information. DevSecOps. 
 
-If you get stuck take a look at this repo, as I can confirm everything is working as expected. Hope this is helpful. Good luck. 
+If you get stuck take a look at [this repo](https://github.com/kyle9021/wbc-demo), as I can confirm everything is working as expected. Hope this is helpful. Good luck. 
 
 
 PS. 
