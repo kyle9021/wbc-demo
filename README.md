@@ -1,7 +1,7 @@
 # Prisma Cloud Code Security and Terraform Sentinel Set-up
 Requirements:
 
-* GitHub repository with terraform files in it something like [this](https://github.com/kyle9021/wbc-demo)
+* GitHub repository with a terraform file, something like [this](https://github.com/kyle9021/wbc-demo/blob/main/s3.tf)
 * An AWS Account with an IAM user that has permissions to deploy IaC files
 * AWS Access Key and Secret key created for your IAM user
 * A license for Prisma Cloud Enterprise with the Code Security Module. 
@@ -25,7 +25,7 @@ Requirements:
 * After you create your variables and have them saved. Copy the workspace name you created earlier and save it in a text file as `WORKSPACE_NAME` we'll come back to this in a bit. 
 * Also underneath your workspace name there should be an ID and a copy icon (looks like two pages on top of one another). Hit the 'copy button' and save the ID in the same text file you saved your `WORKSPACE_NAME` in. We'll need this later too. Save the id as `WORKSPACE_ID`
 
-### Create an api token for your user
+### Create a Terraform api token for your user
 
 * In the top right corner of the page there should be a user/profile icon. 
 * Click that and select 'User Settings'
