@@ -6,6 +6,7 @@ Requirements
 * AWS Access Key and Secret key created for your IAM user
 * A license for Prisma Cloud Enterprise with the Code Security Module. 
 * A blank text doc that looks like [this](https://github.com/kyle9021/wbc-demo/blob/main/example_text_doc.txt)
+* A TF cloud license that is either a trial or TF Cloud license at the TEAM & GOVERNANCE level or higher. see [link](https://www.hashicorp.com/products/terraform/pricing) 
 
 
 ## In Terraform Cloud
