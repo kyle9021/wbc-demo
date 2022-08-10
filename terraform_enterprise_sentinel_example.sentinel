@@ -5,36 +5,36 @@ import "tfrun"
 param PRISMA_ACCESS_KEY
 param PRISMA_SECRET_KEY
 
-body = {
-    "organization" : tfrun.organization.name,
-    "workspace" : {
-        "id" : tfrun.workspace.id,
-        "name": tfrun.workspace.name,
-        "vcs_repo": {
-            "display_identifier": tfrun.workspace.vcs_repo.display_identifier,
-            "branch": tfrun.workspace.vcs_repo.branch,
-        },
-    },
-    "run": {
-        "id": tfrun.id,
-        "created_at": tfrun.created_at,
-        "message": tfrun.message,
-        "commit_sha": tfrun.commit_sha,
-    },
-}
-
-loginReq = http.request("https://<API_STACK>.prismacloud.io/login").with_body(json.marshal({"username": PRISMA_ACCESS_KEY, "password": PRISMA_SECRET_KEY})).with_header("Content-Type", "application/json")
+loginReq = http.request("https://api3.prismacloud.io/login").with_body(json.marshal({"username": PRISMA_ACCESS_KEY, "password": PRISMA_SECRET_KEY})).with_header("Content-Type", "application/json")
 loginResp = json.unmarshal(http.post(loginReq).body)
-req = http.request("https://<API_STACK>.prismacloud.io/bridgecrew/api/v1/global/terraformEnterprise/webhook").with_header("Authorization", loginResp.token)
-resp = json.unmarshal(http.get(req).body)
+body = {
+	"organization" : tfrun.organization.name,
+	"workspace" : {
+		"id" : tfrun.workspace.id,
+		"name": tfrun.workspace.name,
+		"vcs_repo": {
+		  "display_identifier": tfrun.workspace.vcs_repo.display_identifier,
+		  "branch": tfrun.workspace.vcs_repo.branch,
+		},
+  	},
+  	"run": {
+		"id": tfrun.id,
+		"created_at": tfrun.created_at,
+		"message": tfrun.message,
+		"commit_sha": tfrun.commit_sha,
+  	},
+}
+req = http.request("https://api3.prismacloud.io/code/api/v1/global/terraformEnterprise/webhook").with_body(json.marshal(body)).with_header("Authorization", loginResp.token)
+resp = json.unmarshal(http.post(req).body).data
+
 if (length(resp.violations) > 0) {
-    print("Violations:\n")
-    for resp.violations as violation {
-        print(violation.title)
-        print("Resource: " + violation.resource_id)
-        print("Violation ID: " + violation.violation_id)
-        print("\n")
-    }
+  print("Violations:\n")
+  for resp.violations as violation {
+      print(violation.title)
+      print("Resource: " + violation.resource_id)
+      print("Violation ID: " + violation.violation_id)
+      print("\n")
+  }
 }
 print("More details: " + resp.details_url)  
 main = rule { length(resp.violations) < 1 }
